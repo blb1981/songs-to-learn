@@ -1,6 +1,14 @@
 import { useSelector } from 'react-redux'
 import Head from 'next/head'
-import { CssBaseline, List, Typography } from '@mui/material'
+import {
+  CssBaseline,
+  TableContainer,
+  Table,
+  TableHead,
+  TableRow,
+  Typography,
+  TableCell,
+} from '@mui/material'
 
 import styles from '../styles/Home.module.scss'
 import Song from '../components/Song'
@@ -24,17 +32,25 @@ const Home = () => {
       </Typography>
       <SongForm />
 
-      <List className={styles.list}>
-        {songs.map((song) => {
-          return (
-            <Song
-              key={song.songName}
-              name={song.songName}
-              dueDate={song.dueDate}
-            />
-          )
-        })}
-      </List>
+      <TableContainer className={styles.list}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Song</TableCell>
+              <TableCell align="right">Due Date</TableCell>
+            </TableRow>
+          </TableHead>
+          {songs.map((song) => {
+            return (
+              <Song
+                key={song.songName}
+                name={song.songName}
+                dueDate={song.dueDate}
+              />
+            )
+          })}
+        </Table>
+      </TableContainer>
     </div>
   )
 }
