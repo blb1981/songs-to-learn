@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import moment from 'moment'
 import { Button, TextField } from '@mui/material'
 import { DatePicker } from '@mui/lab'
+import { v4 as uuidv4 } from 'uuid'
 
 import styles from '../styles/Home.module.scss'
 import { addSong } from '../actions/songActions'
@@ -21,8 +22,11 @@ const SongForm = () => {
   const onAddSong = (e) => {
     e.preventDefault()
 
+    // Generate unique ID
+    const songId = uuidv4()
+
     // Send data to redux store
-    dispatch(addSong(songToAdd, dueDate.format()))
+    dispatch(addSong(songToAdd, dueDate.format(), songId))
 
     // Reset form state after submission
     setSongToAdd('')

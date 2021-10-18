@@ -38,14 +38,16 @@ const Home = () => {
             <TableRow>
               <TableCell>Song</TableCell>
               <TableCell align="right">Due Date</TableCell>
+              <TableCell align="right">Edit</TableCell>
             </TableRow>
           </TableHead>
           {songs.map((song) => {
             return (
               <Song
-                key={song.songName}
+                key={song.songId}
                 name={song.songName}
                 dueDate={song.dueDate}
+                id={song.songId}
               />
             )
           })}
