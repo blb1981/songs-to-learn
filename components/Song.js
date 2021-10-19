@@ -1,10 +1,16 @@
+import { useDispatch } from 'react-redux'
 import { Button, TableRow, TableCell, Popover } from '@mui/material'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import moment from 'moment'
 
 import styles from '../styles/Home.module.scss'
+import { deleteSong } from '../actions/songActions'
 
 const Song = ({ name, dueDate, id }) => {
+  const dispatch = useDispatch()
+  const onDeleteSong = () => {
+    dispatch(deleteSong(id))
+  }
   return (
     <>
       <TableRow>
@@ -16,14 +22,11 @@ const Song = ({ name, dueDate, id }) => {
         <TableCell align="right">
           {moment(dueDate).format('ll')} ({moment(dueDate).fromNow(true)})
         </TableCell>
-        <Button
-          variant="contained"
-          color="error"
-          onClick={() => console.log(id)}
-        >
-          X
-        </Button>
-        <Popover></Popover>
+        <TableCell align="right">
+          <Button variant="contained" color="error" onClick={onDeleteSong}>
+            X
+          </Button>
+        </TableCell>
       </TableRow>
     </>
   )

@@ -8,6 +8,7 @@ import {
   TableRow,
   Typography,
   TableCell,
+  TableBody,
 } from '@mui/material'
 
 import styles from '../styles/Home.module.scss'
@@ -41,16 +42,18 @@ const Home = () => {
               <TableCell align="right">Edit</TableCell>
             </TableRow>
           </TableHead>
-          {songs.map((song) => {
-            return (
-              <Song
-                key={song.songId}
-                name={song.songName}
-                dueDate={song.dueDate}
-                id={song.songId}
-              />
-            )
-          })}
+          <TableBody>
+            {songs.map((song) => {
+              return (
+                <Song
+                  key={song.songId}
+                  name={song.songName}
+                  dueDate={song.dueDate}
+                  id={song.songId}
+                />
+              )
+            })}
+          </TableBody>
         </Table>
       </TableContainer>
     </div>
