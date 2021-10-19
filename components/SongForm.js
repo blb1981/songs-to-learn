@@ -15,7 +15,7 @@ const SongForm = () => {
   const dispatch = useDispatch()
 
   // Form data kept in local state, using React hooks
-  const [songToAdd, setSongToAdd] = useState('')
+  const [songName, setSongName] = useState('')
   const [dueDate, setDueDate] = useState(monthFromNow)
 
   // Handler for form submission to add song to list
@@ -23,13 +23,13 @@ const SongForm = () => {
     e.preventDefault()
 
     // Generate unique ID
-    const songId = uuidv4()
+    const id = uuidv4()
 
     // Send data to redux store
-    dispatch(addSong(songToAdd, dueDate.format(), songId))
+    dispatch(addSong(songName, dueDate.format(), id))
 
     // Reset form state after submission
-    setSongToAdd('')
+    setSongName('')
     setDueDate(monthFromNow)
   }
   return (
@@ -37,8 +37,8 @@ const SongForm = () => {
       <div className={styles.formControl}>
         <TextField
           label="Song name"
-          value={songToAdd}
-          onChange={(e) => setSongToAdd(e.target.value)}
+          value={songName}
+          onChange={(e) => setSongName(e.target.value)}
           className={styles.input}
         />
       </div>

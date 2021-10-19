@@ -4,25 +4,39 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import moment from 'moment'
 
 import styles from '../styles/Home.module.scss'
-import { deleteSong } from '../actions/songActions'
+import { deleteSong, updateSong } from '../actions/songActions'
 
-const Song = ({ name, dueDate, id }) => {
+const Song = ({ songName, dueDate, id, isComplete }) => {
   const dispatch = useDispatch()
   const onDeleteSong = () => {
     dispatch(deleteSong(id))
+  }
+  const onToggleComplete = () => {
+    const completedSong = {
+      songName,
+      dueDate,
+      id,
+      isComplete: !isComplete,
+    }
+    dispatch(updateSong(completedSong))
   }
   return (
     <>
       <TableRow>
         <TableCell>
           <div className={styles.song}>
-            <span className={styles.songName}>{name}</span>
+            <span className={styles.songName}>{songName}</span>
           </div>
         </TableCell>
+        <TableCell align="right">{moment(dueDate).format('l')}</TableCell>
         <TableCell align="right">
-          {moment(dueDate).format('ll')} ({moment(dueDate).fromNow(true)})
-        </TableCell>
-        <TableCell align="right">
+          <Button
+            variant="contained"
+            color="success"
+            onClick={onToggleComplete}
+          >
+            !
+          </Button>
           <Button variant="contained" color="error" onClick={onDeleteSong}>
             X
           </Button>

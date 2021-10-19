@@ -46,10 +46,11 @@ const Home = () => {
             {songs.map((song) => {
               return (
                 <Song
-                  key={song.songId}
-                  name={song.songName}
+                  key={song.id}
+                  songName={song.songName}
                   dueDate={song.dueDate}
-                  id={song.songId}
+                  isComplete={song.isComplete}
+                  id={song.id}
                 />
               )
             })}
