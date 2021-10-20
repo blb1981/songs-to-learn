@@ -1,6 +1,9 @@
 .root {
-  width: 90vw;
-  margin: 0 auto;
+  // width: 90vw;
+  // margin: 0 auto;
+  // margin-top: 2rem;
+  // display: flex;
+  // justify-content: center;
 }
 .headline {
   font-size: 2rem;
@@ -39,10 +42,7 @@
     flex: 1;
   }
 }
-.list {
-  max-width: 30rem;
-  margin: 0 auto;
-}
+
 .musicIcon {
   margin-right: 0.5rem;
 }
