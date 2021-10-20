@@ -49,10 +49,10 @@ const SongForm = () => {
             setDueDate(dueDate)
           }}
           value={dueDate}
-          clearable
           renderInput={(params) => (
             <TextField className={styles.input} {...params} />
           )}
+          showTodayButton
         />
       </div>
       <div className={styles.formControl}>
