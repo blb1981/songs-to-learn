@@ -53,7 +53,7 @@ const Song = ({ songName, dueDate, id, isComplete }) => {
       <TableRow>
         <TableCell>
           <div className={styles.song}>
-            <span className={isComplete && `${styles.songCompleted}`}>
+            <span className={isComplete && styles.songCompleted}>
               {songName}
             </span>
           </div>

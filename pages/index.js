@@ -14,6 +14,7 @@ import {
 import styles from '../styles/Home.module.scss'
 import Song from '../components/Song'
 import SongForm from '../components/SongForm'
+import { useEffect } from 'react'
 
 const Home = () => {
   const songs = useSelector((state) => state.songs)
@@ -43,17 +44,25 @@ const Home = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {songs.map((song) => {
-              return (
-                <Song
-                  key={song.id}
-                  songName={song.songName}
-                  dueDate={song.dueDate}
-                  isComplete={song.isComplete}
-                  id={song.id}
-                />
-              )
-            })}
+            {songs.length === 0 ? (
+              <TableRow>
+                <TableCell align="center" colSpan={3}>
+                  <Typography>No songs. Get busy!</Typography>
+                </TableCell>
+              </TableRow>
+            ) : (
+              songs.map((song) => {
+                return (
+                  <Song
+                    key={song.id}
+                    songName={song.songName}
+                    dueDate={song.dueDate}
+                    isComplete={song.isComplete}
+                    id={song.id}
+                  />
+                )
+              })
+            )}
           </TableBody>
         </Table>
       </TableContainer>
