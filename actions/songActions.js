@@ -9,8 +9,8 @@ export const addSong = (songName, dueDate, id) => (dispatch) => {
     },
   })
 }
-export const updateSong = (updatedSong) => (dispatch) => {
-  dispatch({ type: 'UPDATE_SONG', payload: updatedSong })
+export const updateSong = (id, updatedSong) => (dispatch) => {
+  dispatch({ type: 'UPDATE_SONG', payload: { id, updatedSong } })
 }
 export const deleteSong = (songId) => (dispatch) => {
   dispatch({ type: 'DELETE_SONG', payload: songId })

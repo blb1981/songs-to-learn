@@ -1,17 +1,23 @@
 const initialState = []
 
-const songsReducer = (state = initialState, action) => {
-  switch (action.type) {
+const songsReducer = (state = initialState, { type, payload }) => {
+  switch (type) {
     case 'ADD_SONG':
-      return [action.payload, ...state]
+      return [payload, ...state]
     case 'UPDATE_SONG':
       return state.map((song) => {
-        if (song.id === action.payload.id) {
-          return action.payload
+        if (payload.id !== song.id) {
+          return song
+        }
+        return {
+          ...song,
+          ...payload.updatedSong,
         }
       })
+
+    // return state
     case 'DELETE_SONG':
-      return state.filter((song) => song.id !== action.payload)
+      return state.filter((song) => song.id !== payload)
     default:
       return state
   }

@@ -18,7 +18,7 @@ const Song = ({ songName, dueDate, id, isComplete }) => {
       id,
       isComplete: !isComplete,
     }
-    dispatch(updateSong(completedSong))
+    dispatch(updateSong(id, completedSong))
   }
   return (
     <>
