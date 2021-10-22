@@ -11,9 +11,14 @@ import {
 
 import styles from '../styles/Home.module.scss'
 import Song from '../components/Song'
+import songsSelector from '../selectors/songsSelector'
 
 const SongList = () => {
+  const filters = useSelector((state) => state.filters)
   const songs = useSelector((state) => state.songs)
+
+  const selectedSongs = songsSelector(songs, filters)
+  // let songs = useSelector((state) => state.songs)
 
   return (
     <TableContainer className={styles.list}>
@@ -33,7 +38,7 @@ const SongList = () => {
               </TableCell>
             </TableRow>
           ) : (
-            songs.map((song) => {
+            selectedSongs.map((song) => {
               return (
                 <Song
                   key={song.id}

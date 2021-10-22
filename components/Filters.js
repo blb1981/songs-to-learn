@@ -8,10 +8,12 @@ const Filters = () => {
 
   const dispatch = useDispatch()
 
-  const handleTextInput = (e) => {
+  const handleTextFilter = (e) => {
     setText(e.target.value)
-    dispatch(setTextFilter(text))
+    dispatch(setTextFilter(e.target.value))
   }
+
+  console.log(text)
   return (
     <div
       style={{
@@ -24,7 +26,7 @@ const Filters = () => {
         Show completed? <input type="checkbox" />
       </div>
       <div>
-        <input type="text" value={text} onChange={handleTextInput} />
+        <input type="text" value={text} onChange={handleTextFilter} />
       </div>
     </div>
   )
