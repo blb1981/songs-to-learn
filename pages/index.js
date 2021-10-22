@@ -1,9 +1,10 @@
 import Head from 'next/head'
-import { CssBaseline, Grid, Typography } from '@mui/material'
+import { CssBaseline, Grid } from '@mui/material'
 
 import styles from '../styles/Home.module.scss'
 
 import Filters from '../components/Filters'
+import Header from '../components/Header'
 import SongList from '../components/SongList'
 import SongForm from '../components/SongForm'
 
@@ -22,11 +23,13 @@ const Home = () => {
 
       <Grid container spacing={3} justifyContent="center" p={3}>
         <Grid item xs={12} sm={10} md={6} lg={4}>
-          <Typography className={styles.headline} variant="h1">
-            Songs To Learn
-          </Typography>
+          <Header />
           <SongForm />
           <Filters />
+        </Grid>
+      </Grid>
+      <Grid container spacing={3} justifyContent="center" p={3}>
+        <Grid item xs={12} md={10}>
           <SongList />
         </Grid>
       </Grid>

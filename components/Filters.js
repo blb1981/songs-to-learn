@@ -1,6 +1,12 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-
+import {
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  Grid,
+  TextField,
+} from '@mui/material'
 import { setTextFilter } from '../actions/filterActions'
 import { setShowCompletedFilter } from '../actions/filterActions'
 
@@ -21,25 +27,30 @@ const Filters = () => {
 
   console.log(text)
   return (
-    <div
-      style={{
-        background: 'pink',
-        display: 'flex',
-        justifyContent: 'space-between',
-      }}
-    >
-      <div>
-        Show completed?{' '}
-        <input
-          type="checkbox"
-          value={showCompleted}
-          onChange={handleShowCompleted}
-        />
-      </div>
-      <div>
-        <input type="text" value={text} onChange={handleTextFilter} />
-      </div>
-    </div>
+    <Grid container justifyContent="space-between" alignItems="flex-end">
+      <Grid item xs={4} md={6}>
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={showCompleted}
+                onChange={handleShowCompleted}
+              />
+            }
+            label="Show completed?"
+          />
+        </FormGroup>
+      </Grid>
+      <Grid item xs={4} md={6}>
+        <FormGroup>
+          <TextField
+            value={text}
+            onChange={handleTextFilter}
+            label="Search..."
+          />
+        </FormGroup>
+      </Grid>
+    </Grid>
   )
 }
 
