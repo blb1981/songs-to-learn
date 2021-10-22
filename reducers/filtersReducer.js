@@ -1,5 +1,6 @@
 const initialState = {
   text: '',
+  showCompleted: false,
 }
 
 const filtersReducer = (state = initialState, { type, payload }) => {
@@ -8,6 +9,11 @@ const filtersReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         text: payload,
+      }
+    case 'SET_SHOW_COMPLETED':
+      return {
+        ...state,
+        showCompleted: payload,
       }
     default:
       return state

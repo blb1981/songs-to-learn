@@ -16,9 +16,7 @@ import songsSelector from '../selectors/songsSelector'
 const SongList = () => {
   const filters = useSelector((state) => state.filters)
   const songs = useSelector((state) => state.songs)
-
   const selectedSongs = songsSelector(songs, filters)
-  // let songs = useSelector((state) => state.songs)
 
   return (
     <TableContainer className={styles.list}>
