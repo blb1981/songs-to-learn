@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux'
 import moment from 'moment'
 import { Button, TextField } from '@mui/material'
 import { DatePicker } from '@mui/lab'
-import { v4 as uuidv4 } from 'uuid'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 
@@ -12,43 +11,27 @@ import { addSong } from '../actions/songActions'
 
 const validationSchema = yup.object({
   songName: yup.string().required('Required'),
-  dueDate: yup.date().required('Required'),
+  dueDate: yup.string().required('Required'),
 })
 
 const SongForm = () => {
-  const monthFromNow = moment().add(1, 'M')
+  const monthFromNow = moment().add(3, 'M')
 
   const dispatch = useDispatch()
 
-  const [songName, setSongName] = useState('')
-  const [dueDate, setDueDate] = useState(monthFromNow)
-
-  const handleAddSong = (e) => {
-    e.preventDefault()
-
-    const id = uuidv4()
-
-    dispatch(addSong(songName, dueDate.format(), id))
-
-    setSongName('')
-    setDueDate(monthFromNow)
-  }
-
   const formik = useFormik({
-    initialValues: { songName, dueDate },
+    initialValues: { songName: '', dueDate: monthFromNow },
     validationSchema,
-    onSubmit: (values) => {
-      console.log(values)
+    onSubmit: (values, { resetForm }) => {
+      dispatch(addSong(values.songName, values.dueDate.format()))
+      resetForm()
     },
+    validateOnBlur: true,
+    validateOnChange: true,
   })
+
   return (
-    <div
-    // initialValues={{ songName: '', dueDate }}
-    // validationSchema={Yup.object({
-    //   songName: Yup.string().required('Required'),
-    //   dueDate: Yup.date().required('Required'),
-    // })}
-    >
+    <div>
       <form onSubmit={formik.handleSubmit} className={styles.form}>
         <div className={styles.formControl}>
           <TextField
@@ -56,6 +39,7 @@ const SongForm = () => {
             name="songName"
             value={formik.values.songName}
             onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             error={formik.touched.songName && Boolean(formik.errors.songName)}
             helperText={formik.touched.songName && formik.errors.songName}
             className={styles.input}
@@ -66,11 +50,17 @@ const SongForm = () => {
             label="Due date"
             name="dueDate"
             value={formik.values.dueDate}
-            onChange={formik.handleChange}
-            error={formik.touched.dueDate && Boolean(formik.errors.dueDate)}
-            helperText={formik.touched.dueDate && formik.errors.dueDate}
+            onBlur={formik.handleBlur}
+            onChange={(e) => {
+              formik.setFieldValue('dueDate', e)
+            }}
             renderInput={(params) => (
-              <TextField className={styles.input} {...params} />
+              <TextField
+                className={styles.input}
+                error={formik.touched.dueDate && Boolean(formik.errors.dueDate)}
+                helperText={formik.touched.dueDate && formik.errors.dueDate}
+                {...params}
+              />
             )}
             showTodayButton
           />

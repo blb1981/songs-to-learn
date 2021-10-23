@@ -1,4 +1,8 @@
-export const addSong = (songName, dueDate, id) => (dispatch) => {
+import { v4 as uuidv4 } from 'uuid'
+
+export const addSong = (songName, dueDate) => (dispatch) => {
+  const id = uuidv4()
+
   dispatch({
     type: 'ADD_SONG',
     payload: {
